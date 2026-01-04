@@ -1,3 +1,3 @@
 # LearingPython
 Learning Python Powerful Object-Oriented Programming 6th edition by Mark Lutz
-Intro (Chapters 1-4)
+Intro captures Chapters 1-9
