@@ -75,24 +75,24 @@ else:
    print(num, 'is prime')
 
 ##
-found = False
-while x and not found:
-   if match(x[0]): # Value at front?
-      print('Found')
-      found = True
-   else:
-      x = x[1:]
-if not found: # Slice off front and repeat
-   print('Not found')
+# found = False
+# while x and not found:
+#    if match(x[0]): # Value at front?
+#       print('Found')
+#       found = True
+#    else:
+#       x = x[1:]
+# if not found: # Slice off front and repeat
+#    print('Not found')
 
 ##
-while x:              # Exit when x empty
-   if match(x[0]):
-      print('Found')
-      break           # Exit, go around else
-   x = x[1:]
-else:
-   print('Not found') # Only here if exhausted x
+# while x:              # Exit when x empty
+#    if match(x[0]):
+#       print('Found')
+#       break           # Exit, go around else
+#    x = x[1:]
+# else:
+#    print('Not found') # Only here if exhausted x
 
 
 ## for Loops
