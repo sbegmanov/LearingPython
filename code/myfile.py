@@ -1,1 +1,1 @@
-title = 'Learning Python, 6th Edition'
+title = 'Learning Python, 6th Edition verseion 6'
