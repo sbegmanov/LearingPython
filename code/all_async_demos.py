@@ -89,3 +89,103 @@ asyncio.run(main())
 # All done, xxx, [18:42:02]
 # All done, yyy, [18:42:04]
 # Stop => [18:42:04]
+
+# Running concurrent tasks with “as_completed” and “gather”
+# in any order
+async def producer(label):
+    await asyncio.sleep(2)
+    return f'All done, {label}, {now()}'
+
+async def main():
+    print('Start =>', now())
+    coros = [producer(f'async task {i+1}') for i in range(3)]
+    for nextdone in asyncio.as_completed(coros):
+        print(await nextdone)
+    print('Stop at', now())
+
+asyncio.run(main())
+# Result…
+# Start => [19:00:38]
+# All done, async task 2, [19:00:40]
+# All done, async task 3, [19:00:40]
+# All done, async task 1, [19:00:40]
+# Stop at [19:00:40]
+
+# in the same order
+async def producer(label):
+    await asyncio.sleep(2)
+    return f'All done, {label}, {now()}'
+
+async def main():
+    print('Start =>', now())
+    coro1 = producer(f'async task 1')
+    coro2 = producer(f'async task 2')
+    coro3 = producer(f'async task 3')
+    results = await asyncio.gather(coro1, coro2, coro3)
+    print(results)
+    print('Stop at', now())
+asyncio.run(main())
+
+# Start => [19:00:40]
+# ['All done, async task 1, [19:00:42]',
+#  'All done, async task 2, [19:00:42]',
+#  'All done, async task 3, [19:00:42]']
+# Stop at [19:00:42]
+
+async def producer(label):
+    await asyncio.sleep(2)
+    return f'All done, {label}, {now()}'
+
+async def main():
+    print('Start =>', now())
+    print(await asyncio.gather(*[producer(f'async task {i+1}') for i in range(3)]))
+    print('Stop at', now())
+
+asyncio.run(main())
+
+# Running concurrent tasks with “async with” and “async for”
+async def producer(label):
+    await asyncio.sleep(2)
+    return f'All done, {label}, {now()}'
+
+async def main():
+    print('Start =>', now())
+    async with asyncio.TaskGroup() as tg:
+        tasks = [tg.create_task(producer(f'async task {i+1}')) for i in range(3)]
+    for task in tasks:
+        print(task.result())
+    print('Stop at', now())
+
+asyncio.run(main())
+
+# Start => [19:00:44]
+# All done, async task 1, [19:00:46]
+# All done, async task 2, [19:00:46]
+# All done, async task 3, [19:00:46]
+# Stop at [19:00:46]
+
+# async for
+async def producer(label):
+    for i in range(3):
+        await asyncio.sleep(2)
+        yield f'All done, {label} {i+1}, {now()}'
+
+async def main():
+    print('Start =>', now())
+    async for reply in producer('async task'):
+        print(reply)
+    print('Stop at', now())
+
+asyncio.run(main())
+
+# Start => [19:00:46]
+# All done, async task 1, [19:00:48]
+# All done, async task 2, [19:00:50]
+# All done, async task 3, [19:00:52]
+# Stop at [19:00:52]
+
+# async for within a comprehension
+async def hmm():
+    result = [i async for i in asynciter() if i > 0] # This code is not real
+    result = [await func() for func in coroutines] # It's also unreal…
+
