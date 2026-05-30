@@ -1,4 +1,7 @@
 "Find minimum -or- maximum value of arguments"
+
+print('I am:', __name__)
+
 def minmax(test, *args):
     res = args[0]
     for arg in args[1:]:
