@@ -1,0 +1,1 @@
+class Person: pass # Start a class
