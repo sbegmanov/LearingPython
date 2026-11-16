@@ -3,11 +3,11 @@ class Methods:
     def imeth(self, x):     # Instance method: passed a self
         print([self, x])    # Always expects a self instance
 
-    @staticmethod
+    #@staticmethod
     def smeth(x):           # Static method: no instance passed
         print([x])          # Also a plain function from the class
 
-    @classmethod
+    #@classmethod
     def cmeth(cls, x):      # Class method: gets class, not instance
         print([cls, x])     # Always expects a class, not instance
 
