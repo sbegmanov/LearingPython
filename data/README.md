@@ -1,1 +1,1 @@
-Actual data stays local
+Actual data stays local.
