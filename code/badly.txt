@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "C:\Users\salam\PycharmProjects\LearingPython\code\badly.py", line 7, in <module>
+    inverse(0)
+    ~~~~~~~^^^
+  File "C:\Users\salam\PycharmProjects\LearingPython\code\badly.py", line 4, in inverse
+    return 1 / x
+           ~~^~~
+ZeroDivisionError: division by zero
